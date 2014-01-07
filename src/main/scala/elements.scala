@@ -63,7 +63,7 @@ trait ShootingMethod {
   def nextShot(field: List[Field]): (Char, Int)
 }
 
-case class RandomShoot extends ShootingMethod {
+case object RandomShoot extends ShootingMethod {
   def nextShot(field: List[Field]) = {
     val rand = new Random(System.currentTimeMillis());
     val list = for (c <- ('A' to 'J'); i <- (1 to 10)) yield (c,i)
