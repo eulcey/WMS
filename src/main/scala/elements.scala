@@ -58,16 +58,3 @@ object WaitAnswer {
   implicit def WaitAnswerCodecJson: CodecJson[WaitAnswer] =
     casecodec3(WaitAnswer.apply, WaitAnswer.unapply)("enemyshot", "status", "reason")
 }
-
-trait ShootingMethod {
-  def nextShot(field: List[Field]): (Char, Int)
-}
-
-case object RandomShoot extends ShootingMethod {
-  def nextShot(field: List[Field]) = {
-    val rand = new Random(System.currentTimeMillis());
-    val list = for (c <- ('A' to 'J'); i <- (1 to 10)) yield (c,i)
-      val random_index = rand.nextInt(list.size);
-    list(random_index);
-  }
-}
