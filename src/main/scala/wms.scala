@@ -10,8 +10,9 @@ object WMS{
   val shootingMethod = RandomShoot
   val gameID = rand.nextInt()
 
-  def main(args: Array[String]) {
-    val url = "http://" + args(0) + "/"
+  //def main(args: Array[String]) {
+  def start(ip: Int, games: Int) {
+    val url = "http://" //+ args(0) + "/"
     println("starting new game with ID: " + gameID)
     val answer = Http.post(url+gameID).option(HttpOptions.connTimeout(1000)).option(HttpOptions.readTimeout(5000)).method("PUT").asString
     println(answer)

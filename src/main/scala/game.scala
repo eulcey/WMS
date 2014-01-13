@@ -92,7 +92,7 @@ class Game(url: String, gameID: Int, secret_token: String, shootingMethod: Shoot
     val down = koords map (k => (k._1, k._2 +1))
     val right = koords map (k => (k._1+1, k._2))
     val left = koords map (k => (k._1-1, k._2))
-    val diags_h = (koords.head._1-1, koords.head._2-1) :: (koords.head._1, koords.head._2+1) :: (koords.head._1+1, koords.head._2-1) :: List.empty
+    val diags_h = (koords.head._1-1, koords.head._2-1) :: (koords.head._1-1, koords.head._2+1) :: (koords.head._1+1, koords.head._2-1) :: List.empty
     val diags_t = (koords.last._1+1, koords.last._2-1) :: (koords.last._1+1, koords.last._2+1) :: (koords.last._1-1, koords.last._2+1) :: List.empty
     diags_h ::: diags_t ::: koords ::: up ::: down ::: right ::: left
   }

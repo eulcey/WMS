@@ -28,7 +28,7 @@ class ShipSetting extends FlatSpec {
     //println(zoneKoords)
   }
 
-  "fitting" should "also calculate the \"safety\" zone in horizontal direction" in {
+  "fitting" should "calculate the \"safety\" zone in horizontal direction" in {
     val emptyField = (for (x <- (0 to 9); y <- (0 to 9)) yield (x, y, false)).toList
     val game = new Game("", 0, "", RandomShoot)
     val newField = game setShipOnField(emptyField, 0, 0, 0, 5)
@@ -90,6 +90,14 @@ class ShipSetting extends FlatSpec {
 
     assertResult(false) {
       game.fitting(newField3, 0, 1, 1, 2)
+    }
+    
+    val newField4 = game setShipOnField(emptyField, 2, 7, 1, 3)
+    val nextField4 = game setShipOnField(newField4, 3, 6, 0, 2)
+    //printFieldList(nextField4)
+
+    assertResult(false) {
+      game.fitting(newField4, 3, 6, 0, 2)
     }
   }
 
