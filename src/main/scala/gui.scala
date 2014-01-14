@@ -5,10 +5,13 @@ import java.awt.{ Graphics2D, Color }
 object WMSGui  extends SimpleSwingApplication {
   val game = new Game("", 0, "", RandomShoot)
   val fieldList = game initPosition
+  var connected = false
     val canvas = new Canvas {
       preferredSize = new Dimension(550, 550)
     }
   val buttonList = fieldList map (f => (new Button))// { text = if(f.enthaelt=="Schiff") "X" else "" }))
+  val ipField = new TextField { text = "Enter IP" }
+  ipField maximumSize = new Dimension(400,30)
 
   def top = new MainFrame {
     title = "Test"
@@ -18,20 +21,27 @@ object WMSGui  extends SimpleSwingApplication {
 	for (b <- buttonList)
 	  contents += b
       }
-      contents += new Button { text  = "test"}
-
+      //contents += new Button { text  = "test"}
+      contents += new BoxPanel(Orientation.Vertical) {
+	contents += ipField
+	contents += new Button { text = if(connected) "disconnect" else "connect" }
+      }
       contents += canvas
     }
     canvas drawField fieldList
   }
+  
+  def estConnection = {
+    false 
+  }
 }
 
 class Canvas extends Panel {
-  var centerColor = Color.yellow
+  //var centerColor = Color.yellow
   var field = List.empty[Field]
 
   override def paintComponent(g: Graphics2D) {
-    val s_width = size.width - 50
+    val s_width = size.width - 50 
     val s_height = size.height - 50
     val f_width = s_width/10
     val f_height = s_height/10
@@ -48,9 +58,7 @@ class Canvas extends Panel {
       g.drawString( (c + 1) toString, (f_width/2)toInt, ((c+1.5) * f_height)toInt)
       // g.fillRect(0, (c+1)*f_height, f_width, f_height)
     }
-    //g.fillOval(20, 20, 60, 60)
-    //g.setColor(centerColor)
-    //g.fillOval(40, 40, 20, 20)
+    //g.fillOval(20, 20, 60, 60)   
     for(f <- field) {
       if (f.enthaelt == "Schiff") {
 	g.setColor(Color.black)
